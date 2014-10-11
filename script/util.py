@@ -292,6 +292,8 @@ class SetCaptureMode():
         d(text = mode).click.wait()
         if sub_mode != None:
             d(text = SUB_MODE[sub_mode]).click.wait()
+        else:
+             time.sleep(6)
 
 class SetOption():
 
@@ -533,6 +535,7 @@ class TouchButton():
         else:
             self.takePicture(capturemode)
         time.sleep(delaytime) #Sleep a few seconds for file saving
+        time.sleep(2)
         afterNo = commands.getoutput('adb shell ls /sdcard/DCIM/100ANDRO/* | grep '+ d[capturemode] +' | wc -l') #Get count after taking picture
         result = commands.getoutput('adb shell cat /data/data/com.intel.camera22/shared_prefs/mode_selected.xml| grep \'value="3"\'')
         if result.find('value="3"') != -1:
