@@ -26,7 +26,7 @@ HFD                 =['6','false']
 HSFD                =['6','true']
 CAMERAMODE_LIST     = ['Depth Snapshot','Single','Video','Panorama','Burst','Perfect Shot']
 FLASH_MODE          =['on','off','auto']
-SCENE_MODE          =['auto','landscape','portrait','night','sports','night-portrait']
+SCENE_MODE          =['auto','landscape','portrait','night','sports'] #'night-portrait'
 EXPOSURE_MODE       = ['-6','-3','0','3','6']
 PICTURESIZE_MODE    =['WideScreen','StandardScreen']
 VIDEOSIZE_MODE      = [['false','4'],['false','5'],['true','5'],['false','6'],['true','6']]
@@ -502,6 +502,8 @@ class CameraTest(unittest.TestCase):
     def _launchCamera(self):
         d.start_activity(component = ACTIVITY_NAME)
         time.sleep(2)
+        if d(text = 'Skip').wait.exists(timeout = 2000):
+            d(text = 'Skip').click.wait()
         #When it is the first time to launch camera there will be a dialog to ask user 'remember location', so need to check
         if d(text = 'OK').wait.exists(timeout = 2000):
             d(text = 'OK').click.wait()
